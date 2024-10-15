@@ -20,8 +20,6 @@ class WeatherService {
         this.geocodeBaseURL = process.env.GEO_API_BASE_URL || "";
         this.apiKey = process.env.API_KEY || "";
         this.city = "";
-        this.id = "";
-        this.currentDate = new Date();
     }
     // Fetch location data from Geocoding API
     async fetchLocationData(query) {
