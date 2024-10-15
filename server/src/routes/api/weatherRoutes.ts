@@ -1,19 +1,31 @@
 import { Router } from 'express';
 const router = Router();
 
-// import HistoryService from '../../service/historyService.js';
-// import WeatherService from '../../service/weatherService.js';
+import HistoryService from '../../service/historyService.js';
+import WeatherService from '../../service/weatherService.js';
 
-// TODO: POST Request with city name to retrieve weather data
-// router.post('/', (req, res) => {
-//   // TODO: GET weather data from city name
-//   // TODO: save city to search history
-// });
+// POST /weather -> get weather data using city name
+router.post('/', async (req, res) => {
+  // GET weather data using city name
+  const city = req.body.cityName;
+  const weatherData = await WeatherService.getWeatherForCity(city);
+  res.json(weatherData);
 
-// TODO: GET search history
-// router.get('/history', async (req, res) => {});
+  // Save city to search history
+  await HistoryService.addCity(city);
+});
 
-// * BONUS TODO: DELETE city from search history
-// router.delete('/history/:id', async (req, res) => {});
+// GET /weather -> get search history
+router.get('/history', async (_, res) => {
+  const cities = await HistoryService.getCities();
+  res.json(cities);
+});
+
+// DELETE city from search history
+router.delete('/history/:id', async (req, res) => {
+  const id = req.params.id;
+  await HistoryService.removeCity(id);
+  res.sendStatus(204);
+});
 
 export default router;
