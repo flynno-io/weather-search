@@ -89,7 +89,7 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+# dist - commented out because it hiding the necessary Typescript build folder with the same name
 
 # Gatsby files
 .cache/
