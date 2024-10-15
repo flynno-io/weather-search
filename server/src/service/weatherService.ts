@@ -43,8 +43,6 @@ class WeatherService {
 	private geocodeBaseURL: string = process.env.GEO_API_BASE_URL || ""
 	private apiKey: string = process.env.API_KEY || ""
 	city: string = ""
-	id: string = ""
-	currentDate: Date = new Date()
 
 	// Fetch location data from Geocoding API
 	private async fetchLocationData(query: string): Promise<any> {
